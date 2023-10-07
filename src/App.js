@@ -6,7 +6,7 @@ import { Navbar } from "./components/navbar";
 import { ProductsPage } from "./pages/products";
 import { SigninPage } from "./pages/signin";
 import { ProductDetailsPage } from "./pages/productDetails.js";
-
+import { Footer } from "./components/footer";
 
 function App() {
   return (
@@ -21,6 +21,7 @@ function App() {
                 <Route element={<SigninPage />} path="/signin"/>
                 <Route element={<ProductDetailsPage />} path="/productDetails"/>
             </Routes>
+            <Footer />
         </BrowserRouter>
     </div>
     
