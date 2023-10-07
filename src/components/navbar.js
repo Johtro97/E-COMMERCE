@@ -1,13 +1,14 @@
 import { Link } from  "react-router-dom"
 import { OpenCart } from "./cart";
-import { useRecoilState } from "recoil";
-import { IsOpen } from "../contex/recoil";
+import { useRecoilValue, useRecoilState } from "recoil";
+import { userLogin, IsOpen } from "../contex/recoil";
 import { useState } from "react";
 
 
 export function Navbar(){
 	const [showCart, setShowCart] = useRecoilState(IsOpen);
 	const [dropDown, setOpen] = useState(false)
+	const user = useRecoilValue(userLogin);
 
 	const handleClick = () =>{
 		setShowCart(showCart => !showCart);
@@ -76,13 +77,19 @@ export function Navbar(){
 				<section className="right-0 w-full bg-white fixed top-0 h-full shadow dark:bg-gray-700 md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px] overflow-auto">
 					<div>
 						<div className="flex items-center justify-between py-6 border-b uppercase text-sm">
+							<h3>Shopping Bag</h3>
+							{user === null? 
+								<Link to="/signin" onClick={handleClick} className="hover:underline hover:text-red-400">sign in</Link>
+								:<Link to="/signin" onClick={handleClick} className="hover:underline hover:text-red-400">user: {user.username}</Link>
+							}
 							<button onClick={handleClick} className="text-sm px-4 py-2 text-center mr-3 md:mr-2 hover:underline hover:text-red-400" type="button">X</button>
 						</div>
-						
+							<div>
+								<OpenCart />
+							</div>
 					</div>
 				</section>
 						) : null}
 			</div>
 		</>
 )}
-

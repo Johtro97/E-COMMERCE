@@ -40,7 +40,7 @@ export function ProductsPage(){
 
   return (
     <div className="flex-col space-y-4 ">
-      <section className="flex top-56 w-screen h-full text-center">
+      <section className="flex top-56 w-screen h-full mt-36 ">
         <Filter />
       </section>
       <section className="w-screen text-center">
