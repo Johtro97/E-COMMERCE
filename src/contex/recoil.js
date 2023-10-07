@@ -14,3 +14,8 @@ export const productCategory = atom({
   key: "product-category",
   default: productState,
 });  
+
+export const IsOpen = atom({
+  key: "openCart",
+  default: false,
+});
