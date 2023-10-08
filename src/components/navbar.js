@@ -41,9 +41,10 @@ export function Navbar(){
               <Link to="/signin" className="hover:underline hover:text-red-400">sign in/sign Up</Link>
               :<Link to="/signin" className="hover:underline hover:text-red-400 flex flex-row">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                 </svg>
-							  {user.username}</Link>
+							  {user.username}
+              </Link>
 					}</Link>
 				</li>
 			</ul>
@@ -55,7 +56,7 @@ export function Navbar(){
 			<nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 left-0 border-b border-gray-200">
 				<div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 					<Link to="/" class="flex items-center">
-							<span class="self-center text-2xl font-semibold whitespace-nowrap text-red-400 ">WebShop</span>
+						<span class="self-center text-2xl font-semibold whitespace-nowrap text-red-400 ">WebShop</span>
 					</Link>
 
 					<div class="flex md:order-2">
@@ -71,27 +72,29 @@ export function Navbar(){
 						</button>
 					</div>
 
-					{dropDown ? (
+					{dropDown ? 
 					<div class="hidden items-center justify-between w-full md:flex md:w-auto md:order-1" id="navbar-sticky">								
 						<Meny />
 					</div>
-					) : <div class="items-center justify-between w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
+          :<div class="items-center justify-between w-full md:flex md:w-auto md:order-1" id="navbar-sticky">
 						<Meny />
-				</div>}
+				  </div>}
 				</div>
 			</nav>
 
 			<div>{showCart ? (
-				<section className="right-0 w-full bg-white fixed top-0 h-full shadow md:w-[35vw] xl:max-w-[30vw] overflow-auto">
+				<section className="fixed right-0 w-full bg-white  top-0 h-full shadow md:w-[35vw] xl:max-w-[30vw] transition-all duration-300 z-20 px-4 lg:px-[35px] overflow-auto">
 					<div>
 						<div className="flex items-center justify-between py-6 border-b uppercase text-sm">
 							<h3>Shopping Bag</h3>
 							{user === null? 
 								<Link to="/signin" onClick={handleClick} className="hover:underline hover:text-red-400">sign in/Sign Up</Link>
-								:<Link to="/signin" onClick={handleClick} className="hover:underline hover:text-red-400"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
-								<path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
-							  </svg>
-							   {user.username}</Link>
+								:<Link to="/signin" onClick={handleClick} className="hover:underline hover:text-red-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+								    <path strokeLinecap="round" strokeLinejoin="round" d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+							    </svg>
+							    {user.username}
+                </Link>
 							}
 							<button onClick={handleClick} className="text-sm px-4 py-2 text-center mr-3 md:mr-2 hover:underline hover:text-red-400" type="button">X</button>
 						</div>
@@ -99,8 +102,9 @@ export function Navbar(){
 								<OpenCart />
 							</div>
 					</div>
-				</section>
-						) : null}
+				</section>) 
+      : null}
 			</div>
 		</>
-)}
+  )
+}

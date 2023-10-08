@@ -13,7 +13,7 @@ export function ProductsPage(){
     GetAllProducts().then((result) => {
       setProducts(result)
     })
-      }, []);
+  }, []);
    
   const filterProducts=(cat) =>{
     const updatedList = products.filter((x) => x.category === cat )
@@ -23,7 +23,6 @@ export function ProductsPage(){
 
 
   const Filter =() =>{
-    
     return(
       <div className="text-center md:space-x-8 md:flex-row flex flex-col place-content-center">     
         <button className="border-r pr-3 hover:underline hover:text-red-400"onClick={() => setFilter(products)}>All</button>
@@ -43,7 +42,8 @@ export function ProductsPage(){
       <section className="w-screen text-center">
         <Products />
       </section>      
-</div>  
-)}
+		</div>  
+	)
+}
 
 
