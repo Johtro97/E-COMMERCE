@@ -28,11 +28,11 @@ export function ProductDetails(){
   };
 
     return(
-      <>  
+      <div className="flex flex-col text-center sm:w-6/12 h-screen items-center justify-center space-y-2.5 ">  
           <div><img src={item.image} width={250} height={250}/></div>
-          <h3>{item.title}</h3>
-          <p>{item.category}</p>
-          <p>{item.description}</p> 
+          <h3 className="uppercase">{item.title}</h3>
+          <p className="italic">{item.category}</p>
+          <p className="text-sm">{item.description}</p> 
           <p>$ {item.price}</p>  
           {isItemInCart(item) ? (
               <p><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
@@ -40,9 +40,9 @@ export function ProductDetails(){
             </svg>
             </p>   
           ) : (
-              <button onClick={() => addItemToCart(item)} className="hover:underline hover:text-red-400">Add to cart</button>
+              <button onClick={() => addItemToCart(item)} className="w-36 bg-orange-50 shadow-md p-2 rounded-md hover:underline hover:text-red-400">Add to cart</button>
               )}
-        </>
+        </div>
      
     )
 } 

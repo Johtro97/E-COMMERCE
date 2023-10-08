@@ -2,7 +2,7 @@ import { ProductDetails } from "../components/details"
 
 export function ProductDetailsPage(){
     return(
-        <div className="bg-white-50 w-screen h-screen text-center">
+        <div className="flex flex-col w-screen mt-36 h-screen items-center justify-center">
             <ProductDetails />
         </div>
      )

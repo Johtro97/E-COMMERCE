@@ -1,13 +1,16 @@
 import { useState, useEffect } from "react"
-import { useRecoilState } from "recoil";
-import { userLogin, userState} from "../contex/recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
+import { userLogin, userState, IsOpen, cartItem} from "../contex/recoil";
 import { login, saveUsers, loadUsers } from "../contex/storage";
+import { Link } from "react-router-dom";
 
 
 export function SigninPage(){
     const [currentForm, setCurrentForm] = useState("login")
     const [user, setUser] = useRecoilState(userLogin);
     const [users, setUsers] = useRecoilState(userState);
+    const [showCart, setShowCart] = useRecoilState(IsOpen)
+    const cart = useRecoilValue(cartItem)
 
     useEffect(() => {
         let loaded = loadUsers();
@@ -44,18 +47,24 @@ export function SigninPage(){
             }
           
             return (
-                <>
-                    <form onSubmit={handleSubmit}>
-                        <h2>Create Account</h2>
-                        <label form="username">Username: </label>
-                        <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="username" id="username" name="username" required/>
-                        <label form="password">Password: </label>
-                        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*****" id="password" name="password" required/>
-                        <div><button type="submit" onClick={() => signUp()}>Register</button></div>
-                    </form>
-                    <button onClick={() => props.onFormSwitch("login")}>Already have an account? Login here.</button>
-                    {message}
-                 </>
+                <div>
+                  <form onSubmit={handleSubmit}  className="flex flex-col justify-center items-center space-y-6">
+                  <h2>Create Account</h2>
+                  <div>
+                    <label form="username">Username: </label>
+                    <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="username" id="username" name="username" required/>
+                  </div>
+                  <div>
+                    <label form="password">Password: </label>
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*****" id="password" name="password" required/>                
+                  </div>
+                  <button type="submit" onClick={() => signUp()} className="w-36 bg-orange-50 shadow-md p-2 rounded-md hover:underline hover:text-red-400">Register</button>
+                  </form>
+                  <br />
+                  <button onClick={() => props.onFormSwitch("login")} className="hover:underline hover:text-red-400">Already have an account? Login here.</button>
+                  <br />
+                  {message}
+                 </div>
             );
           }
           
@@ -77,32 +86,50 @@ export function SigninPage(){
         
           return (
             <>
-                <div className="">
-                    <h2>Welcome back! Sign in to checkout.</h2>
-                    <form onSubmit={handleSubmit}>
-                        <label form="username">Username: </label>
-                        <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="username" id="username" name="username" required/>
-                        <label form="password"> password</label>
-                        <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*****" id="password" name="password" required/>
-                        <div><button type="submit" onClick={() => tryLogin()}>Log In</button></div> 
-                    </form>
-                    <button onClick={() => props.onFormSwitch("register")}>Dont have an account? Register here.</button>
-                    {message}
-                </div>
+              <div>
+                  <form onSubmit={handleSubmit} className="flex flex-col justify-center items-center space-y-6">
+                  <h2>Welcome back! Sign in to checkout.</h2>
+                  <div>
+                    <label form="username">Username: </label>
+                    <input value={username} onChange={(e) => setUsername(e.target.value)} type="username" placeholder="username" id="username" name="username" required/>
+                  </div>
+                  <div>
+                    <label form="password">Password: </label>
+                    <input value={password} onChange={(e) => setPassword(e.target.value)} type="password" placeholder="*****" id="password" name="password" required/>
+                  </div>
+                  <button type="submit" onClick={() => tryLogin()} className="w-36 bg-orange-50 shadow-md p-2 rounded-md hover:underline hover:text-red-400">Log In</button>
+                  </form>
+                  <br />
+                  <button onClick={() => props.onFormSwitch("register")} className="hover:underline hover:text-red-400">Dont have an account? Register here.</button>
+                  <br />
+                  {message}
+              </div>
             </>
           );
         } 
+        const handleClick = () =>{
+          setShowCart(showCart => !showCart);
+          return showCart;
+      }
 
     return(
-        <div className="bg-white-50 w-screen h-screen text-center mt-36">{ user === null ?(
-            <div>
+        <div className="flex flex-col w-screen p-10 h-screen items-center bg-orange-50 justify-center">{ user === null ?(
+            <div className="p-10 space-y-5 border rounded border-orange-40 bg-white">
             <div>{currentForm === "login" ?  <Login onFormSwitch={toggleForm} /> : <Register onFormSwitch={toggleForm} /> 
             }</div>
         </div>
         ):(  
-            <div>
-                <div> Welcome {user.username} {console.log(user)}!</div>
-                <button onClick={() => { setUser(user => null)}}>Logout</button>
+            <div className="flex flex-col p-10 space-y-5 border rounded border-orange-40 bg-white justify-center items-center">
+                <div className="mb-10 text-center"> Welcome {user.username} {console.log(user)}!
+                </div>
+                {showCart !== true ? 
+                  <div>{cart.length === 0 ? 
+                    <Link to="/products" className="hover:underline hover:text-red-400">Your cart is empty, go to products</Link>
+                    :<button onClick={() => handleClick()} className="hover:underline hover:text-red-400">Redy to Checkout?</button>
+                } 
+                </div>
+                :null}
+                <button onClick={() => { setUser(user => null)}} className="w-36 bg-orange-50 shadow-md p-2 rounded-md hover:underline hover:text-red-400">Logout</button>
             </div>)}
         </div>
 

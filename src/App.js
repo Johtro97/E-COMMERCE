@@ -10,19 +10,22 @@ import { Footer } from "./components/footer";
 
 function App() {
   return (
-    <div>
+    <div className="overflow-hidden">
         <BrowserRouter>
             <Navbar />
+          <div >
             <Routes>
-                <Route element={<HomePage />} path="/home" />
+                <Route element={<HomePage />} path="/" />
                 <Route element={<ProductsPage />} path="/products"/>
                 <Route element={<AboutPage />} path="/about"/>
                 <Route element={<ContactPage />} path="/contact"/>
                 <Route element={<SigninPage />} path="/signin"/>
                 <Route element={<ProductDetailsPage />} path="/productDetails"/>
             </Routes>
-            <Footer />
+            </div>
+          <div><Footer /></div>
         </BrowserRouter>
+        
     </div>
     
   );
